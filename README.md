@@ -1,4 +1,4 @@
-# profusion-terraform-foundations
+# your-project-name-terraform-foundations
 
 This code is the foundational layer for an AWS account. This will build basic networking
 capability, and attach a transit gateway for intra-account networking. It will also
