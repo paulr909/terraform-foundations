@@ -82,7 +82,6 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "transit_gateway_attachment" {
   vpc_id             = module.vpc.vpc_id
 }
 # Delete the default vpc?
-
 module "your-project-name_developer_policy" {
   source      = "terraform-aws-modules/iam/aws//modules/iam-policy"
   version     = "~> 4"
@@ -191,7 +190,7 @@ module "your-project-name_developer_assumable_role" {
   ]
   number_of_custom_role_policy_arns = 1
 }
-/*==== Service Endpoints ====*/
+# Service endpoints
 resource "aws_vpc_endpoint" "s3" {
   vpc_id            = module.vpc.vpc_id
   service_name      = "com.amazonaws.eu-west-2.s3"
@@ -272,7 +271,6 @@ resource "aws_instance" "bastion" {
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.bastion-security.id]
 }
-
 
 resource "aws_security_group" "bastion-security" {
   name   = "bastion-sg"

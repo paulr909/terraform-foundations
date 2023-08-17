@@ -1,23 +1,23 @@
 locals {
   env = {
     default = {
-      profile        = "nope"
+      profile        = "placeholder"
       developers     = []
       public_subnets = []
     }
     sandbox = {
       start_cidr_range = "10.16.0.0/16"
-      profile          = "de_sandbox"
-      developers       = ["paul", "lucy", "adam", "john"]
+      profile          = "sandbox"
+      developers       = ["paul", "lucy", "adam"]
       public_subnets   = ["10.16.24.0/21", "10.16.32.0/21", "10.16.40.0/21"]
     }
-    majestic = {
+    acme = {
       start_cidr_range = "10.17.0.0/16"
-      profile          = "majestic"
-      developers       = ["robertf", "ivans"]
+      profile          = "acme"
+      developers       = ["paul", "lucy"]
       public_subnets   = ["10.17.24.0/21", "10.17.32.0/21", "10.17.40.0/21"]
     }
   }
-  environmentvars = contains(keys(local.env), terraform.workspace) ? terraform.workspace : "default"
-  workspace       = merge(local.env["default"], local.env[local.environmentvars])
+  env_vars  = contains(keys(local.env), terraform.workspace) ? terraform.workspace : "default"
+  workspace = merge(local.env["default"], local.env[local.env_vars])
 }
